@@ -1,0 +1,16 @@
+{
+  "_default": {
+    "1": {
+      "eventName": "Massachusets cupertino party",
+      "address": "1280 Vista Dr, 95014",
+      "time": "June 6th, 5PM-6PM EST",
+      "description": "This is a party for all the people in the Massachusets area. We will have food, drinks, and music."
+    },
+    "2": {
+      "eventName": "Massachusets cupertino party 2.0",
+      "address": "1280 Vista Dr",
+      "time": "une 6th, 5PM-6PM EST",
+      "description": "bruh ememe why does flkdjsa"
+    }
+  }
+}

@@ -26,7 +26,6 @@ def setCoords():
     #   "coords": [12, 15], # lat, long eg 37.3230° N, 122.0322° W = [-122.0322, 37.3230]
     #   "r": 2 # radius
     # }
-    print("wtf")
     data = request.get_json()
     db_location.insert(data)
     return 'Data added to the database'
@@ -40,7 +39,8 @@ def setEvents():
     # {
     #   "eventName": "Massachusets cupertino party",
     #   "addresss": "1280 Vista Dr",
-    #   "time": "1-2 hrs" 
+    #   "time": "May 1, 5PM-6PM" 
+    #   "description": "Bring water, gloves sanitation and anything else you need to clean up the street",
     # }
     data = request.get_json()
     db_event.insert(data)

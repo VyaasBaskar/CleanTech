@@ -1,6 +1,9 @@
-const eventBox = ({ eventName, distance }) => {
+const eventBox = ({ eventName, distance, onClick }) => {
   return (
-    <div className="border border-x-0 opacity-50 justify-center">
+    <div
+      className="border border-x-0 opacity-50 justify-center cursor-pointer"
+      onClick={onClick}
+    >
       <div className="flex justify-between py-2">
         <h3 className="text-[20px]  text-white opacity-80">
           {eventName.length > 14 ? eventName.slice(0, 14) + "..." : eventName}
