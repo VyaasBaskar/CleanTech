@@ -1,5 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_cors import CORS
+import base64
+from io import BytesIO
+from PIL import Image
 
 from tinydb import TinyDB, Query
 db_location = TinyDB('./db_location.json')
@@ -11,26 +14,28 @@ event = Query()
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
-
 @app.route('/getCoords', methods=['GET'])
 def getCoords():
     return {'coords': db_location.all()}
 
-@app.route('/setCoords', methods=['POST'])
-def setCoords():
-    # {
-    #   "c": "#FFF21", # color
-    #   "coords": [12, 15], # lat, long eg 37.3230° N, 122.0322° W = [-122.0322, 37.3230]
-    #   "r": 2 # radius
-    # }
-    print("wtf")
-    data = request.get_json()
-    db_location.insert(data)
-    return 'Data added to the database'
+@app.route('/post_drone_data', methods=['POST'])
+def post_drone_data():
+    try:
+        r = request.get_json()
 
+        print(r["gpsData"])
+
+        decoded_image = base64.b64decode(r["image"])
+
+        image = Image.open(BytesIO(decoded_image))
+        image.save("./hi.png")
+
+        db_location.insert(r)
+
+        return Response()
+    except:
+        return Response()
+    
 @app.route('/getEvents', methods=['GET'])
 def getEvents():
     return {'events': db_event.all()}
@@ -44,7 +49,13 @@ def setEvents():
     # }
     data = request.get_json()
     db_event.insert(data)
+
+    decoded_image = base64.b64decode(data)
+
+    image = Image.open(BytesIO(decoded_image))
+    image.save("./hi.png")
+
     return 'Data added to the database'
 
 if __name__ == '__main__':
-    app.run()
+    app.run("0.0.0.0", 3003)
