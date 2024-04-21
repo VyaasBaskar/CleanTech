@@ -22,11 +22,11 @@ const SideBar = ({ visible = false }) => {
       }}
     >
       <div>
-        <img
+        {/* <img
           src="https://s3-alpha-sig.figma.com/img/d20e/18d5/63e25311db37c8621435698069865715?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RBWTH-taSv87ZvfHLEMtt5-KMNzXYWXW34QdIU~qb7Xi1x5-QsQtprxGL3z7EEdDunaL1c7PzpMKYoXGSpFex6xvvjAb6hcYuP2q4gDQDejmE8iMxrHw8FOyBn0~8~sMfXMPka0bWxynrECxN3r~nC1ToJc~hxweylfW0f75W0TzjMAH5K1H5yu7LFxCAhD3mZVXoCQbcMTXQBbHiBfYPbcMYyykF9zSirP2QUAsbTBzMA4SuxvOj49nRDAINpLtI-ZJKV9IsfBm4T7fwjjoG8S6PDr7c3Ef0Wep70-IibMwlbbFMBBQVE1R-8MIAF2WjugHlDt0pJyOrk~vzYT42w__"
           alt="search"
           className="h-[20vh] object-cover rounded-2xl"
-        />
+        /> */}
 
         <h2 className="text-[20px] text-white font-bold mt-5">
           What does this mean?
@@ -37,8 +37,8 @@ const SideBar = ({ visible = false }) => {
           }}
           className="text-[16px]"
         >
-          This area contains a high density of plastic as scanned by drone
-          footage on 04/12/2023
+          This area contains a <span className="font-bold">low density</span> of
+          plastic as scanned by drone footage on 04/20/2024
         </p>
       </div>
       <div className="flex flex-col gap-2">

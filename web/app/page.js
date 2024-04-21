@@ -20,6 +20,31 @@ const App = () => {
   const [visible, setVisible] = useState(false);
   const [boxVisible, setBoxVisible] = useState(false);
 
+  const [circleData, setCircleData] = useState({});
+
+  const batchReverseGeocode = async (coordinatesArray) => {
+    try {
+      const addresses = await Promise.all(
+        coordinatesArray.map(async (coords) => {
+          const [longitude, latitude] = coords;
+          const response = await fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`
+          );
+          const data = await response.json();
+          if (data.features.length) {
+            return data.features[0].place_name;
+          } else {
+            return "No address found";
+          }
+        })
+      );
+      return addresses;
+    } catch (error) {
+      console.error("Error batch reverse geocoding:", error);
+      return [];
+    }
+  };
+
   const [events, setEvents] = useState([
     {
       eventName: "Massachusets cupertino party",
