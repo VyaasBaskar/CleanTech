@@ -3,6 +3,7 @@ from flask_cors import CORS
 import base64
 from io import BytesIO
 from PIL import Image
+from process_image import process
 
 from tinydb import TinyDB, Query
 db_location = TinyDB('./db_location.json')
@@ -28,9 +29,11 @@ def post_drone_data():
         decoded_image = base64.b64decode(r["image"])
 
         image = Image.open(BytesIO(decoded_image))
-        image.save("./hi.png")
+        
+        cl, score = process(image)
 
-        db_location.insert(r)
+        if cl == 1 and score >= 0.5:
+            db_location.insert(r)
 
         return Response()
     except:
@@ -42,18 +45,13 @@ def getEvents():
 
 @app.route('/setEvents', methods=['POST'])
 def setEvents():
-    # {
-    #   "eventName": "Massachusets cupertino party",
-    #   "addresss": "1280 Vista Dr",
-    #   "time": "1-2 hrs" 
-    # }
     data = request.get_json()
     db_event.insert(data)
 
     decoded_image = base64.b64decode(data)
 
     image = Image.open(BytesIO(decoded_image))
-    image.save("./hi.png")
+    image.save("./save.png")
 
     return 'Data added to the database'
 
